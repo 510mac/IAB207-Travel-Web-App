@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block header %}
+      <!--Jumbotron-->
+<div class="container">
+  <div class="row justify-content-center mt-5 pb-4">
+    <div class="col-md-8">
+      <div class="card shadow p-5 mb-5 bg-light">
+        <h1 class="text-center mb-3">Looking For A New Travel Destination?</h1>
+
+        <form class="form-inline d-flex flex-wrap justify-content-center" action="{{ url_for('main.search') }}">
+          <input
+            type="text"
+            name="search"
+            class="form-control my-1 mr-sm-2"
+            id="SearchForm"
+            style="width: 400px;"
+            placeholder="e.g. Copenhagen, Tokyo, Ottawa...">
+          <button type="submit" class="btn btn-primary my-1">Search</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block content %}   
+<div class="container">
+  <div class="row mt-5 mb-5 justify-content-center">
+    <div class="col-12 d-flex justify-content-center">
+      <div style="max-width: 800px; width: 100%;" class="border p-4 rounded shadow-sm">
+        <div class="media d-flex align-items-center">
+          <img class="align-self-center me-3"
+               style="max-width: 120px;"
+               src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Earth_Western_Hemisphere_transparent_background.png/600px-Earth_Western_Hemisphere_transparent_background.png"
+               alt="Planet Earth">
+          <div class="media-body">
+            <h5 class="mt-0">Looking For Your Next Getaway?</h5>
+            <p class="d-none d-sm-block">Find the best priced travel deals anywhere on Earth with the above search bar!</p>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a href="#" class="btn btn-primary">Take Me There!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card-group justify-content-center">
+  {% for destination in destinations %}
+  <div class="card mx-3 rounded shadow-sm" style="max-width: 300px;">
+    <div class="p-3 pb-0">
+      <img class="card-img-top rounded"
+           src="{{ destination.image }}"
+           alt="destination picture"
+           style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
+    </div>
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ destination.name }}</h5>
+      <p class="card-text">{{ destination.description }}</p>
+    </div>
+    <div class="card-footer bg-transparent border-0 text-center">
+      <a href="{{ url_for('destination.show', id=destination.id) }}" class="btn btn-primary">View Details</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}
